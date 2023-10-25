@@ -1,4 +1,4 @@
-﻿[Setup]
+[Setup]
 WizardStyle=modern
 DisableWelcomePage=False
 AppName=What The Dub - TDoT русификатор
