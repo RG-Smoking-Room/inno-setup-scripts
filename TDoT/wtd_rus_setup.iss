@@ -1,8 +1,8 @@
 [Setup]
 WizardStyle=modern
 DisableWelcomePage=False
-AppName=What The Dub - TDoT русификатор
-AppVersion=2.0
+AppName=What the Dub?! (рус. Какого Дубля?!) - TDoT русификатор
+AppVersion=2.1
 AppCopyright=The Department of Translates
 PrivilegesRequired=none
 ShowLanguageDialog=no
@@ -10,10 +10,9 @@ ArchitecturesInstallIn64BitMode=x64
 DefaultDirName={reg:HKLM\Software\Microsoft\Windows\CurrentVersion\Uninstall\Steam App 1495860,InstallLocation|C:\Program Files (x86)\Steam\steamapps\common\WhatTheDub}
 AppPublisher=The Department of Translates
 AppPublisherURL=https://vk.com/tdot_rus
-UninstallDisplayName=What The Dub - TDoT русификатор
+UninstallDisplayName=What the Dub?! (рус. Какого Дубля?!) - TDoT русификатор
 EnableDirDoesntExistWarning=True
 DirExistsWarning=no
-UninstallDisplayIcon={uninstallexe},5
 WizardSmallImageFile=D:\Downloads\renpy-sdk\!test_files\wtd\logo_wtd копия.bmp
 WizardImageFile=D:\Downloads\renpy-sdk\!test_files\wtd\immage_wtd копия.bmp
 Compression=lzma2/ultra
@@ -22,11 +21,17 @@ UsePreviousSetupType=False
 UsePreviousTasks=False
 DisableDirPage=no
 AppendDefaultDirName=False
+InfoBeforeFile=D:\Downloads\renpy-sdk\!test_files\wtd\tdot_before.rtf
+SetupIconFile=D:\Downloads\renpy-sdk\!test_files\wtd\wtd_install.ico
+UninstallDisplayIcon=D:\Downloads\renpy-sdk\!test_files\wtd\wtd_uninstall.ico
+VersionInfoVersion=2.1
+VersionInfoDescription=What the Dub?! (рус. Какого Дубля?!) - TDoT русификатор
 
 [Languages]
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Files]
+Source: "{app}\WhatTheDub_Data\sharedassets0.assets"; DestDir: "{app}\Install_Rus"; DestName: "sharedassets0.assets.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall
 Source: "{app}\WhatTheDub_Data\Managed\Assembly-CSharp.dll"; DestDir: "{app}\Install_Rus"; DestName: "Assembly-CSharp.dll.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall
 Source: "{app}\WhatTheDub_Data\StreamingAssets\AssetBundles\audio-manager"; DestDir: "{app}\Install_Rus"; DestName: "audio-manager.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall
 Source: "{app}\WhatTheDub_Data\StreamingAssets\AssetBundles\credits"; DestDir: "{app}\Install_Rus"; DestName: "credits.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall
@@ -48,6 +53,7 @@ Source: "{app}\WhatTheDub_Data\StreamingAssets\UiVideo\Round_7.mp4"; DestDir: "{
 Source: "{app}\WhatTheDub_Data\StreamingAssets\UiVideo\Round_8.mp4"; DestDir: "{app}\Install_Rus"; DestName: "Round_8.mp4.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall
 Source: "{app}\WhatTheDub_Data\StreamingAssets\UiVideo\Round_9.mp4"; DestDir: "{app}\Install_Rus"; DestName: "Round_9.mp4.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall
 Source: "{app}\WhatTheDub_Data\StreamingAssets\UiVideo\Round_Final.mp4"; DestDir: "{app}\Install_Rus"; DestName: "Round_Final.mp4.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall
+Source: "..\renpy-sdk\!test_files\wtd\WhatTheDub_Data\sharedassets0.assets"; DestDir: "{app}\WhatTheDub_Data"
 Source: "..\renpy-sdk\!test_files\wtd\WhatTheDub_Data\Managed\Assembly-CSharp.dll"; DestDir: "{app}\WhatTheDub_Data\Managed"; Flags: ignoreversion
 Source: "..\renpy-sdk\!test_files\wtd\WhatTheDub_Data\StreamingAssets\AssetBundles\*"; DestDir: "{app}\WhatTheDub_Data\StreamingAssets\AssetBundles\"
 Source: "..\renpy-sdk\!test_files\wtd\WhatTheDub_Data\StreamingAssets\Subtitles\*"; DestDir: "{app}\WhatTheDub_Data\StreamingAssets\Subtitles\"
@@ -72,6 +78,7 @@ end;
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 begin
   if CurUninstallStep = usPostUninstall then    
+    RenameFile(ExpandConstant('{app}\Install_Rus\sharedassets0.assets.bak'), ExpandConstant('{app}\WhatTheDub_Data\sharedassets0.assets'));
     RenameFile(ExpandConstant('{app}\Install_Rus\Assembly-CSharp.dll.bak'), ExpandConstant('{app}\WhatTheDub_Data\Managed\Assembly-CSharp.dll'));
     RenameFile(ExpandConstant('{app}\Install_Rus\audio-manager.bak'), ExpandConstant('{app}\WhatTheDub_Data\StreamingAssets\AssetBundles\audio-manager'));
     RenameFile(ExpandConstant('{app}\Install_Rus\credits.bak'), ExpandConstant('{app}\WhatTheDub_Data\StreamingAssets\AssetBundles\credits'));
