@@ -2,7 +2,7 @@
 WizardStyle=modern
 DisableWelcomePage=False
 AppName=What the Dub?! (рус. Какого Дубля?!) - TDoT русификатор
-AppVersion=2.1
+AppVersion=2.2
 AppCopyright=The Department of Translates
 PrivilegesRequired=none
 ShowLanguageDialog=no
@@ -24,7 +24,7 @@ AppendDefaultDirName=False
 InfoBeforeFile=D:\Downloads\renpy-sdk\!test_files\wtd\tdot_before.rtf
 SetupIconFile=D:\Downloads\renpy-sdk\!test_files\wtd\wtd_install.ico
 UninstallDisplayIcon=D:\Downloads\renpy-sdk\!test_files\wtd\wtd_uninstall.ico
-VersionInfoVersion=2.1
+VersionInfoVersion=2.2
 VersionInfoDescription=What the Dub?! (рус. Какого Дубля?!) - TDoT русификатор
 
 [Languages]
