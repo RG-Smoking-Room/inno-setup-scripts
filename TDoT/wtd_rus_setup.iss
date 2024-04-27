@@ -2,7 +2,7 @@
 WizardStyle=modern
 DisableWelcomePage=False
 AppName=What the Dub?! (рус. Какого Дубля?!) - TDoT русификатор
-AppVersion=2.2
+AppVersion=2.3
 AppCopyright=The Department of Translates
 PrivilegesRequired=none
 ShowLanguageDialog=no
@@ -24,7 +24,7 @@ AppendDefaultDirName=False
 InfoBeforeFile=D:\Downloads\renpy-sdk\!test_files\wtd\tdot_before.rtf
 SetupIconFile=D:\Downloads\renpy-sdk\!test_files\wtd\wtd_install.ico
 UninstallDisplayIcon=D:\Downloads\renpy-sdk\!test_files\wtd\wtd_uninstall.ico
-VersionInfoVersion=2.2
+VersionInfoVersion=2.3
 VersionInfoDescription=What the Dub?! (рус. Какого Дубля?!) - TDoT русификатор
 
 [Languages]
@@ -43,6 +43,7 @@ Source: "{app}\WhatTheDub_Data\StreamingAssets\AssetBundles\modals"; DestDir: "{
 Source: "{app}\WhatTheDub_Data\StreamingAssets\AssetBundles\results"; DestDir: "{app}\Install_Rus"; DestName: "results.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall
 Source: "{app}\WhatTheDub_Data\StreamingAssets\AssetBundles\theater-transition"; DestDir: "{app}\Install_Rus"; DestName: "theater-transition.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall
 Source: "{app}\WhatTheDub_Data\StreamingAssets\AssetBundles\waiting-for-players"; DestDir: "{app}\Install_Rus"; DestName: "waiting-for-players.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall
+Source: "{app}\WhatTheDub_Data\StreamingAssets\CustomSfx\_AddingCustomSfx.txt"; DestDir: "{app}\Install_Rus"; DestName: "_AddingCustomSfx.txt.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall; Tasks: addmemesfx
 Source: "{app}\WhatTheDub_Data\StreamingAssets\UiVideo\Round_1.mp4"; DestDir: "{app}\Install_Rus"; DestName: "Round_1.mp4.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall
 Source: "{app}\WhatTheDub_Data\StreamingAssets\UiVideo\Round_2.mp4"; DestDir: "{app}\Install_Rus"; DestName: "Round_2.mp4.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall
 Source: "{app}\WhatTheDub_Data\StreamingAssets\UiVideo\Round_3.mp4"; DestDir: "{app}\Install_Rus"; DestName: "Round_3.mp4.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall
@@ -56,6 +57,7 @@ Source: "{app}\WhatTheDub_Data\StreamingAssets\UiVideo\Round_Final.mp4"; DestDir
 Source: "..\renpy-sdk\!test_files\wtd\WhatTheDub_Data\sharedassets0.assets"; DestDir: "{app}\WhatTheDub_Data"
 Source: "..\renpy-sdk\!test_files\wtd\WhatTheDub_Data\Managed\Assembly-CSharp.dll"; DestDir: "{app}\WhatTheDub_Data\Managed"; Flags: ignoreversion
 Source: "..\renpy-sdk\!test_files\wtd\WhatTheDub_Data\StreamingAssets\AssetBundles\*"; DestDir: "{app}\WhatTheDub_Data\StreamingAssets\AssetBundles\"
+Source: "..\renpy-sdk\!test_files\wtd\WhatTheDub_Data\StreamingAssets\CustomSfx\*"; DestDir: "{app}\WhatTheDub_Data\StreamingAssets\CustomSfx\"; Tasks: addmemesfx
 Source: "..\renpy-sdk\!test_files\wtd\WhatTheDub_Data\StreamingAssets\Subtitles\*"; DestDir: "{app}\WhatTheDub_Data\StreamingAssets\Subtitles\"
 Source: "..\renpy-sdk\!test_files\wtd\WhatTheDub_Data\StreamingAssets\UiVideo\*"; DestDir: "{app}\WhatTheDub_Data\StreamingAssets\UiVideo\"
 Source: "..\renpy-sdk\!test_files\wtd\WhatTheDub_Data\StreamingAssets\VideoClips\*"; DestDir: "{app}\WhatTheDub_Data\StreamingAssets\VideoClips\"
@@ -64,6 +66,8 @@ Source: "..\renpy-sdk\!test_files\wtd\WhatTheDub_Data\StreamingAssets\TheEndClip
 [Tasks]
 Name: "replaceendings"; Description: "Да, хочу видеть концовки из советских фильмов"; GroupDescription: "Хотите ли Вы заменить оригинальные зарубежные концовки фильмов на советские альтернативы?"; Flags: exclusive
 Name: "dontreplaceendings"; Description: "Нет, оставьте оригинальные концовки"; GroupDescription: "Хотите ли Вы заменить оригинальные зарубежные концовки фильмов на советские альтернативы?"; Flags: exclusive unchecked
+Name: "addmemesfx"; Description: "Да, добавьте"; GroupDescription: "Добавить ли в игру специальный набор мемных звуковых эффектов, которые игроки смогут использовать во время ввода ответа? (Такие звуки будут отмечены специальной припиской)"; Flags: exclusive
+Name: "dontaddmemesfx"; Description: "Нет, не нужно"; GroupDescription: "Добавить ли в игру специальный набор мемных звуковых эффектов, которые игроки смогут использовать во время ввода ответа? (Такие звуки будут отмечены специальной припиской)"; Flags: exclusive unchecked
 
 [Code] 
 procedure CurStepChanged(CurStep: TSetupStep);
@@ -90,6 +94,7 @@ begin
     RenameFile(ExpandConstant('{app}\Install_Rus\results.bak'), ExpandConstant('{app}\WhatTheDub_Data\StreamingAssets\AssetBundles\results'));
     RenameFile(ExpandConstant('{app}\Install_Rus\theater-transition.bak'), ExpandConstant('{app}\WhatTheDub_Data\StreamingAssets\AssetBundles\theater-transition'));
     RenameFile(ExpandConstant('{app}\Install_Rus\waiting-for-players.bak'), ExpandConstant('{app}\WhatTheDub_Data\StreamingAssets\AssetBundles\waiting-for-players'));
+    RenameFile(ExpandConstant('{app}\Install_Rus\_AddingCustomSfx.txt.bak'), ExpandConstant('{app}\WhatTheDub_Data\StreamingAssets\CustomSfx\_AddingCustomSfx.txt'));
     RenameFile(ExpandConstant('{app}\Install_Rus\Subtitles\'), ExpandConstant('{app}\WhatTheDub_Data\StreamingAssets\Subtitles\'));
     RenameFile(ExpandConstant('{app}\Install_Rus\Round_1.mp4.bak'), ExpandConstant('{app}\WhatTheDub_Data\StreamingAssets\UiVideo\Round_1.mp4'));
     RenameFile(ExpandConstant('{app}\Install_Rus\Round_2.mp4.bak'), ExpandConstant('{app}\WhatTheDub_Data\StreamingAssets\UiVideo\Round_2.mp4'));
