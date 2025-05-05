@@ -39,6 +39,7 @@ Source: "release-user\totono_steam\Patch\*"; DestDir: "{app}"; Flags: recursesub
 
 [Tasks]
 Name: "compatibility"; Description: "Установить патч для старых систем"; GroupDescription: "Другие задачи:"; Flags: unchecked
+Name: "jast_dx_compat"; Description: "Не заменять system.npk (для совместимости с Director's Cut DLC)"; GroupDescription: "Другие задачи:"; Flags: unchecked
 
 [Code]
 procedure CurStepChanged(CurStep: TSetupStep);
@@ -48,6 +49,12 @@ begin
     begin
       DeleteFile(ExpandConstant('{app}\dxgi.dll'));
       DeleteFile(ExpandConstant('{app}\SRL.ini'));
+    end;
+    if WizardIsTaskSelected('jast_dx_compat') then
+    begin
+      DeleteFile(ExpandConstant('{app}\system.npk'));
+      RenameFile(ExpandConstant('{app}\Install_Rus\system.npk.bak'), ExpandConstant('{app}\system.npk'));
+      DelTree(ExpandConstant('{app}\Install_Rus\'), True, False, False);
     end;
 end;
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
