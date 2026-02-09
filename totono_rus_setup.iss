@@ -1,5 +1,5 @@
 ﻿[Setup]
-WizardStyle=modern
+WizardStyle=modern dynamic
 DisableWelcomePage=False
 AppName=YOU and ME and HER: A Love Story Russian Patch
 AppVersion=1.0
@@ -16,8 +16,10 @@ AppPublisherURL=https://vk.com/onthecrack
 UninstallDisplayName=YOU and ME and HER: A Love Story Russian Patch
 EnableDirDoesntExistWarning=True
 DirExistsWarning=no
-WizardSmallImageFile=D:\Downloads\rpatool\release-user\totono_steam\totono_installer_small_image.bmp
-WizardImageFile=D:\Downloads\rpatool\release-user\totono_steam\totono_installer_image.bmp
+WizardSmallImageFile=D:\Downloads\rpatool\release-user\totono_steam\totono_installer_small_image.png
+WizardSmallImageFileDynamicDark=D:\Downloads\rpatool\release-user\totono_steam\totono_installer_small_image.png
+WizardImageFile=D:\Downloads\rpatool\release-user\totono_steam\totono_installer_image.png
+WizardImageFileDynamicDark=D:\Downloads\rpatool\release-user\totono_steam\totono_installer_image.png
 Compression=lzma2/ultra64
 InternalCompressLevel=ultra64
 AppendDefaultDirName=False
@@ -31,7 +33,6 @@ VersionInfoDescription=YOU and ME and HER: A Love Story Russian Patch
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 
 [Files]
-Source: "{app}\system.npk"; DestDir: "{app}\Install_Rus"; DestName: "system.npk.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall
 Source: "{app}\Mware.dll"; DestDir: "{app}\Install_Rus"; DestName: "Mware.dll.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall; Tasks: compatibility
 Source: "{app}\totono_Steam.exe"; DestDir: "{app}\Install_Rus"; DestName: "totono_Steam.exe.bak"; Flags: external skipifsourcedoesntexist uninsneveruninstall; Tasks: compatibility
 Source: "release-user\totono_steam\Patch_Legacy\*"; DestDir: "{app}"; Flags: ignoreversion; Tasks: compatibility
@@ -39,29 +40,25 @@ Source: "release-user\totono_steam\Patch\*"; DestDir: "{app}"; Flags: recursesub
 
 [Tasks]
 Name: "compatibility"; Description: "Установить патч для старых систем"; GroupDescription: "Другие задачи:"; Flags: unchecked
-Name: "jast_dx_compat"; Description: "Не заменять system.npk (для совместимости с Director's Cut DLC)"; GroupDescription: "Другие задачи:"; Flags: unchecked
 
 [Code]
 procedure CurStepChanged(CurStep: TSetupStep);
 begin
   if CurStep = ssPostInstall then
+  begin
     if WizardIsTaskSelected('compatibility') then
     begin
       DeleteFile(ExpandConstant('{app}\dxgi.dll'));
       DeleteFile(ExpandConstant('{app}\SRL.ini'));
     end;
-    if WizardIsTaskSelected('jast_dx_compat') then
-    begin
-      DeleteFile(ExpandConstant('{app}\system.npk'));
-      RenameFile(ExpandConstant('{app}\Install_Rus\system.npk.bak'), ExpandConstant('{app}\system.npk'));
-      DelTree(ExpandConstant('{app}\Install_Rus\'), True, False, False);
-    end;
+  end;
 end;
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
 begin
-  if CurUninstallStep = usPostUninstall then    
-    RenameFile(ExpandConstant('{app}\Install_Rus\system.npk.bak'), ExpandConstant('{app}\system.npk'));
+  if CurUninstallStep = usPostUninstall then
+  begin    
     RenameFile(ExpandConstant('{app}\Install_Rus\Mware.dll.bak'), ExpandConstant('{app}\Mware.dll'));
     RenameFile(ExpandConstant('{app}\Install_Rus\totono_Steam.exe.bak'), ExpandConstant('{app}\totono_Steam.exe'));
     DelTree(ExpandConstant('{app}\Install_Rus\'), True, False, False);
+  end;
 end;
